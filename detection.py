@@ -3,6 +3,10 @@ import numpy as np
 import os
 import math
 
+def preprocess_image(image_path, target_size=(256, 256)):
+    img = Image.open(image_path)
+    img = img.resize(target_size)  # Resize to consistent size
+    return img
 
 def analyze_histogram(image_path):
     img = Image.open(image_path)
@@ -28,7 +32,7 @@ def calculate_entropy(file_path):
     return entropy
 
 
-def detect_image(image_path, hist_threshold=100000, entropy_threshold=7.95):
+def detect_image(image_path, hist_threshold=1000000, entropy_threshold=8.5):
     variance = analyze_histogram(image_path)
     entropy = calculate_entropy(image_path)
 
